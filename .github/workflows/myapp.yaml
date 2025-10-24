@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       myinput:
-      type: 'environment'
+      type: environment
       description: 'Dev'
       required: true
     
@@ -15,5 +15,6 @@ jobs:
     steps:
       - name: Sample Command
         run: echo "Hello World"
+
 
 
