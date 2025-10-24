@@ -1,10 +1,10 @@
 ---
 name: myappworkflow
-on:
-  workflow_dispatch: null
+on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu_latest
     steps:
       - name: Sample Command
         run: echo "Hello World"
+
