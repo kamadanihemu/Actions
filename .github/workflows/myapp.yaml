@@ -1,10 +1,19 @@
 ---
 name: myappworkflow
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      myinput:
+      type: 'environment'
+      description: 'Dev'
+      required: true
+    
+     
 jobs:
   build:
     runs-on: ubuntu_latest
     steps:
       - name: Sample Command
         run: echo "Hello World"
+
 
