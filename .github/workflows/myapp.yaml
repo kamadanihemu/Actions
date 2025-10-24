@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       myinput:
+      description: 'Deployment'
       type: choice
       options:
         - Dev
@@ -18,6 +19,7 @@ jobs:
     steps:
       - name: Sample Command
         run: echo "Hello World"
+
 
 
 
