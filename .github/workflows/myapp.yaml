@@ -4,8 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       myinput:
-      type: environment
-      description: 'Dev'
+      type: choice
+      options:
+        - Dev
+        - Stage
+        - Prod
       required: true
     
      
@@ -15,6 +18,7 @@ jobs:
     steps:
       - name: Sample Command
         run: echo "Hello World"
+
 
 
 
