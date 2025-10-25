@@ -14,7 +14,7 @@ env:
   AWS_SECRET: '123456'
   run: |
     echo ${{AWS_ACCESSKEY}}
-    echo ${{env.Steps_evn_Env}}
+   # echo ${{env.Steps_evn_Env}}
 jobs:
 
   build:
@@ -36,6 +36,7 @@ jobs:
           echo ${{AWS_ACCESSKEY}}
       - name: Context
         run: echo ${{runner.os}} && echo ${{github.actor}}
+
 
 
 
