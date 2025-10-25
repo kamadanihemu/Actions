@@ -28,7 +28,13 @@ jobs:
           echo "Hello World"
           echo ${{env.Steps_evn_Env}}
       - name: Context
-        run: echo ${{runner.os}} && echo ${{github.actor}}
+        run: |
+          echo ${{runner.os}} && echo ${{github.actor}}
+          echo ${{env.Build_SECRET}}
+           echo ${{env.Build_Env}}
+          
+          
+
 
 
 
