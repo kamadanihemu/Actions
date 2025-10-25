@@ -9,6 +9,9 @@ on:
           - Dev
           - Stage
           - Prod
+env:
+  AWS_ACCESSKEY:'ABCDEFG'
+  AWS_SECRET:'123456'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,6 +20,7 @@ jobs:
         run: echo "Hello World"
       - name: Context
         run: echo ${{runner.os}} && echo ${{github.actor}}
+
 
 
 
