@@ -10,11 +10,15 @@ on:
           - Stage
           - Prod
 env:
-  AWS_ACCESSKEY: 'ABCDEFG'
-  AWS_SECRET: '123456'
+  Dev_AWS_ACCESSKEY: 'Dev-ABCDEFG'
+  Dev_AWS_SECRET: 'Dev-123456'
+  UAT_AWS_ACCESSKEY: 'UAT-ABCDEFG'
+  UAT_AWS_SECRET: 'UAT-123456'
+  Prod_AWS_ACCESSKEY: 'Prod-ABCDEFG'
+  Prod_AWS_SECRET: 'Prod-123456'
 jobs:
 
-  build:
+  Devbuild:
     runs-on: ubuntu-latest
     env:
       Build_Env: 'Build Env'
@@ -32,10 +36,52 @@ jobs:
           echo ${{runner.os}} && echo ${{github.actor}}
           echo ${{env.Build_SECRET}}
           echo ${{env.Build_Env}}
-          echo ${{env.AWS_ACCESSKEY}}
+          echo ${{env.Dev_AWS_ACCESSKEY}}
+          echo ${{env.Dev_AWS_SECRET}}
           
+
+  UATbuild:
+    runs-on: ubuntu-latest
+    env:
+      Build_Env: 'Build Env'
+      Build_SECRET: 'Build Secret'
+    steps:
+      - name: Sample Command
+        env:
+          Steps_evn_Env: 'Steps Env'
+          Steps_SECRET: 'Steps Secret'
+        run: |
+          echo "Hello World"
+          echo ${{env.Steps_evn_Env}}
+      - name: Context
+        run: |
+          echo ${{runner.os}} && echo ${{github.actor}}
+          echo ${{env.Build_SECRET}}
+          echo ${{env.Build_Env}}
+          echo ${{env.UAT_AWS_ACCESSKEY}}
+          echo ${{env.UAT_AWS_SECRET}}
+  Prodbuild:
+    runs-on: ubuntu-latest
+    env:
+      Build_Env: 'Build Env'
+      Build_SECRET: 'Build Secret'
+    steps:
+      - name: Sample Command
+        env:
+          Steps_evn_Env: 'Steps Env'
+          Steps_SECRET: 'Steps Secret'
+        run: |
+          echo "Hello World"
+          echo ${{env.Steps_evn_Env}}
+      - name: Context
+        run: |
+          echo ${{runner.os}} && echo ${{github.actor}}
+          echo ${{env.Build_SECRET}}
+          echo ${{env.Build_Env}}
+          echo ${{env.Prod_AWS_ACCESSKEY}}
+          echo ${{env.Prod_AWS_SECRET}}
           
-          
+
 
 
 
