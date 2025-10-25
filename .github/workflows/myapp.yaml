@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Sample Command
         run: echo "Hello World"
+      - name: Context
+        run: echo ${{runner.os}} && echo ${{github.actor}}
+
 
 
 
