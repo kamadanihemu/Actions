@@ -27,9 +27,9 @@ jobs:
         run: |
           echo "Hello World"
           echo ${{env.Steps_evn_Env}}
-          #echo ${{AWS_ACCESSKEY}}
       - name: Context
         run: echo ${{runner.os}} && echo ${{github.actor}}
+
 
 
 
