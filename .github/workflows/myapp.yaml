@@ -11,12 +11,13 @@ on:
           - Prod
 jobs:
   build:
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     steps:
       - name: Sample Command
         run: echo "Hello World"
       - name: Context
         run: echo ${{runner.os}} && echo ${{github.actor}}
+
 
 
 
