@@ -41,6 +41,7 @@ jobs:
           
 
   UATbuild:
+    needs: Devbuild
     runs-on: ubuntu-latest
     env:
       Build_Env: 'Build Env'
@@ -61,6 +62,7 @@ jobs:
           echo ${{env.UAT_AWS_ACCESSKEY}}
           echo ${{env.UAT_AWS_SECRET}}
   Prodbuild:
+    needs: UATbuild
     runs-on: ubuntu-latest
     env:
       Build_Env: 'Build Env'
@@ -81,6 +83,7 @@ jobs:
           echo ${{env.Prod_AWS_ACCESSKEY}}
           echo ${{env.Prod_AWS_SECRET}}
           
+
 
 
 
