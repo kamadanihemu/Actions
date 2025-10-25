@@ -31,9 +31,12 @@ jobs:
         run: |
           echo ${{runner.os}} && echo ${{github.actor}}
           echo ${{env.Build_SECRET}}
-           echo ${{env.Build_Env}}
+          echo ${{env.Build_Env}}
+          echo ${{env.AWS_ACCESSKEY}}
           
           
+          
+
 
 
 
