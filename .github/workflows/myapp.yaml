@@ -1,26 +1,19 @@
 ---
 name: myappworkflow
-on: 
+on:
   workflow_dispatch:
     inputs:
-      myinput:
-      description: 'Deployment'
+      myinput: null
+      description: Deployment
       type: choice
       options:
         - Dev
         - Stage
         - Prod
       required: true
-    
-     
 jobs:
   build:
     runs-on: ubuntu_latest
     steps:
       - name: Sample Command
         run: echo "Hello World"
-
-
-
-
-
