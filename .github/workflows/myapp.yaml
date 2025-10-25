@@ -12,9 +12,6 @@ on:
 env:
   AWS_ACCESSKEY: 'ABCDEFG'
   AWS_SECRET: '123456'
-  run: |
-    echo ${{AWS_ACCESSKEY}}
-   # echo ${{env.Steps_evn_Env}}
 jobs:
 
   build:
@@ -22,9 +19,6 @@ jobs:
     env:
       Build_Env: 'Build Env'
       Build_SECRET: 'Build Secret'
-      run: |
-        echo ${{env.Build_Env}}
-        echo ${{env.Steps_evn_Env}}
     steps:
       - name: Sample Command
         env:
@@ -36,6 +30,7 @@ jobs:
           echo ${{AWS_ACCESSKEY}}
       - name: Context
         run: echo ${{runner.os}} && echo ${{github.actor}}
+
 
 
 
