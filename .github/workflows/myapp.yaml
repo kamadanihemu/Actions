@@ -1,14 +1,19 @@
 ---
 name: myappworkflow
+
 on:
   workflow_dispatch:
     inputs:
-      myinput:
-        type: enviroment
+      my_env:
+        description: "Target environment"
+        type: choice
         options:
           - Dev
-          - Stage
+          - UAT
           - Prod
+        required: true
+        default: Dev
+
 env:
   Dev_AWS_ACCESSKEY: 'Dev-ABCDEFG'
   Dev_AWS_SECRET: 'Dev-123456'
@@ -16,38 +21,43 @@ env:
   UAT_AWS_SECRET: 'UAT-123456'
   Prod_AWS_ACCESSKEY: 'Prod-ABCDEFG'
   Prod_AWS_SECRET: 'Prod-123456'
+
 jobs:
 
   Devbuild:
+    if: ${{ inputs.my_env == 'Dev' }}
     runs-on: ubuntu-latest
     env:
       Build_Env: 'Build Env'
       Build_SECRET: 'Build Secret'
     steps:
       - name: Sample Command
-        
+        if: ${{ inputs.my_env == 'Dev' }}
         env:
-          Steps_evn_Env: 'Steps Env'
+          Steps_env_Env: 'Steps Env'
           Steps_SECRET: 'Steps Secret'
-        if: inputs.myinput
         run: |
           echo "Hello World"
-          echo ${{env.Steps_evn_Env}}
+          # Either GitHub expression (expanded before shell)...
+          echo "Steps_env_Env (expr) = ${{ env.Steps_env_Env }}"
+          # ...or plain bash env:
+          echo "Steps_env_Env (bash) = $Steps_env_Env"
+
       - name: Context
         run: |
-          if: [[ ${{ env.Build_Env == 'Build Env'}} && ${{env.Build_SECRET == 'Build Secret'}} ]]; then
-            echo ${{runner.os}} && echo ${{github.actor}}
-            echo ${{env.Build_SECRET}}
-            echo ${{env.Build_Env}}
-            echo ${{env.Dev_AWS_ACCESSKEY}}
-            echo ${{env.Dev_AWS_SECRET}}
-          else:
+          if [[ "$Build_Env" == "Build Env" && "$Build_SECRET" == "Build Secret" ]]; then
+            echo "${{ runner.os }}" && echo "${{ github.actor }}"
+            echo "Build_SECRET = $Build_SECRET"
+            echo "Build_Env   = $Build_Env"
+            # Top-level envs are available as bash vars:
+            echo "Dev_AWS_ACCESSKEY = $Dev_AWS_ACCESSKEY"
+            echo "Dev_AWS_SECRET    = $Dev_AWS_SECRET"
+          else
             echo "Execute this block"
           fi
-          
-          
 
   UATbuild:
+    if: ${{ inputs.my_env == 'UAT' }}
     needs: Devbuild
     runs-on: ubuntu-latest
     env:
@@ -56,19 +66,22 @@ jobs:
     steps:
       - name: Sample Command
         env:
-          Steps_evn_Env: 'Steps Env'
+          Steps_env_Env: 'Steps Env'
           Steps_SECRET: 'Steps Secret'
         run: |
           echo "Hello World"
-          echo ${{env.Steps_evn_Env}}
+          echo "$Steps_env_Env"
+
       - name: Context
         run: |
-          echo ${{runner.os}} && echo ${{github.actor}}
-          echo ${{env.Build_SECRET}}
-          echo ${{env.Build_Env}}
-          echo ${{env.UAT_AWS_ACCESSKEY}}
-          echo ${{env.UAT_AWS_SECRET}}
+          echo "${{ runner.os }}" && echo "${{ github.actor }}"
+          echo "$Build_SECRET"
+          echo "$Build_Env"
+          echo "$UAT_AWS_ACCESSKEY"
+          echo "$UAT_AWS_SECRET"
+
   Prodbuild:
+    if: ${{ inputs.my_env == 'Prod' }}
     needs: UATbuild
     runs-on: ubuntu-latest
     env:
@@ -77,36 +90,16 @@ jobs:
     steps:
       - name: Sample Command
         env:
-          Steps_evn_Env: 'Steps Env'
+          Steps_env_Env: 'Steps Env'
           Steps_SECRET: 'Steps Secret'
         run: |
           echo "Hello World"
-          echo ${{env.Steps_evn_Env}}
+          echo "$Steps_env_Env"
+
       - name: Context
         run: |
-          echo ${{runner.os}} && echo ${{github.actor}}
-          echo ${{env.Build_SECRET}}
-          echo ${{env.Build_Env}}
-          echo ${{env.Prod_AWS_ACCESSKEY}}
-          echo ${{env.Prod_AWS_SECRET}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          echo "${{ runner.os }}" && echo "${{ github.actor }}"
+          echo "$Build_SECRET"
+          echo "$Build_Env"
+          echo "$Prod_AWS_ACCESSKEY"
+          echo "$Prod_AWS_SECRET"
