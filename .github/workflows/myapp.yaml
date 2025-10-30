@@ -35,11 +35,15 @@ jobs:
           echo ${{env.Steps_evn_Env}}
       - name: Context
         run: |
-          echo ${{runner.os}} && echo ${{github.actor}}
-          echo ${{env.Build_SECRET}}
-          echo ${{env.Build_Env}}
-          echo ${{env.Dev_AWS_ACCESSKEY}}
-          echo ${{env.Dev_AWS_SECRET}}
+          if: [[ {{ Build_Env == 'Build Env'}} && {{Build_SECRET =='Build Secret'}} ]]; then
+            echo ${{runner.os}} && echo ${{github.actor}}
+            echo ${{env.Build_SECRET}}
+            echo ${{env.Build_Env}}
+            echo ${{env.Dev_AWS_ACCESSKEY}}
+            echo ${{env.Dev_AWS_SECRET}}
+          else:
+            echo "Execute this block"
+          
           
 
   UATbuild:
@@ -90,6 +94,7 @@ jobs:
 
   DevDeployment:
     if
+
 
 
 
