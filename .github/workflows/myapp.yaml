@@ -35,7 +35,7 @@ jobs:
           echo ${{env.Steps_evn_Env}}
       - name: Context
         run: |
-          if: [[ {{ Build_Env == 'Build Env'}} && {{Build_SECRET =='Build Secret'}} ]]; then
+          if: [[ {{ Build_Env == 'Build Env'}} && {{Build_SECRET == 'Build Secret'}} ]]; then
             echo ${{runner.os}} && echo ${{github.actor}}
             echo ${{env.Build_SECRET}}
             echo ${{env.Build_Env}}
@@ -88,6 +88,7 @@ jobs:
           echo ${{env.Build_Env}}
           echo ${{env.Prod_AWS_ACCESSKEY}}
           echo ${{env.Prod_AWS_SECRET}}
+
 
 
 
