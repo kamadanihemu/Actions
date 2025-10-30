@@ -6,11 +6,7 @@ on:
     inputs:
       my_env:
         description: "Target environment"
-        type: choice
-        options:
-          - Dev
-          - UAT
-          - Prod
+        type: environment
         required: true
         default: Dev
 
@@ -103,3 +99,4 @@ jobs:
           echo "$Build_Env"
           echo "$Prod_AWS_ACCESSKEY"
           echo "$Prod_AWS_SECRET"
+
