@@ -43,6 +43,7 @@ jobs:
             echo ${{env.Dev_AWS_SECRET}}
           else:
             echo "Execute this block"
+          fi
           
           
 
@@ -88,6 +89,7 @@ jobs:
           echo ${{env.Build_Env}}
           echo ${{env.Prod_AWS_ACCESSKEY}}
           echo ${{env.Prod_AWS_SECRET}}
+
 
 
 
