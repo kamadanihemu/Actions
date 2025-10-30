@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       myinput:
-        type: choice
+        type: enviroment
         options:
           - Dev
           - Stage
@@ -25,9 +25,11 @@ jobs:
       Build_SECRET: 'Build Secret'
     steps:
       - name: Sample Command
+        
         env:
           Steps_evn_Env: 'Steps Env'
           Steps_SECRET: 'Steps Secret'
+        if: inputs.!myinput
         run: |
           echo "Hello World"
           echo ${{env.Steps_evn_Env}}
@@ -82,8 +84,12 @@ jobs:
           echo ${{env.Build_Env}}
           echo ${{env.Prod_AWS_ACCESSKEY}}
           echo ${{env.Prod_AWS_SECRET}}
+
           
 
+
+  DevDeployment:
+    if
 
 
 
